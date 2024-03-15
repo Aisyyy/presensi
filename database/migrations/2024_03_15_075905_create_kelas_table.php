@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCodeTable extends Migration
+class CreateKelasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateCodeTable extends Migration
      */
     public function up()
     {
-        Schema::create ('code', function (Blueprint $table) {
+        Schema::create('kelas', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
-            $table->string('id_user');
-            $table->string('id_user_get');
+            $table->string('jurusan');
+            $table->string('fakultas');
+            $table->string('tingkat');
             $table->timestamps();
-            
+
         });
     }
 
@@ -30,7 +30,6 @@ class CreateCodeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('code');
+        Schema::dropIfExists('kelas');
     }
 }
-

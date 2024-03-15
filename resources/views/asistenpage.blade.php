@@ -1,6 +1,6 @@
-@extends('backend.partial.master') @section('content')
+@extends('template.master') @section('content')
 @php 
-$role = App\User::where('id', Auth::id())->first();
+$role = App\Models\User::where('id', Auth::id())->first();
 @endphp
 <div class="container-fluid">
     <!-- BreadCrumb -->
@@ -98,10 +98,7 @@ $role = App\User::where('id', Auth::id())->first();
                                             <td>{{$item->join_date}}</td>
                                             <td>{{$item->Role}}</td>
                                             <td>{{$item->email}}</td>
-                                            <td>
-                                                <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#ModalEdit" onclick="getData('{{$item->id}}')">Edit</button>
-                                                <a class="btn btn-sm btn-danger" href="{{route('destroyAsisten', ["id" => $item->id])}}">Delete</a>
-                                            </td>
+
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -142,7 +139,7 @@ $role = App\User::where('id', Auth::id())->first();
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="form-data-asisten" method="post" data-route="{{ route('storeAsisten')}}" enctype="multipart/form-data">
+            <form id="form-data-asisten" method="post" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <div class="modal-body">
                     <div class="row">
@@ -213,7 +210,7 @@ $role = App\User::where('id', Auth::id())->first();
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="form-data-asisten-edit" method="post" data-route="{{ route('updateAsisten')}}" enctype="multipart/form-data">
+            <form id="form-data-asisten-edit" method="post" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <div class="modal-body">
                     <div class="row">
@@ -293,35 +290,5 @@ $role = App\User::where('id', Auth::id())->first();
 <script type="text/javascript" src="{{ URL::asset ('js/backend/asisten/updateAsisten.js') }}" ></script>
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-<script>
 
-function getData(id){
-            axios.post("{{route('editAsisten')}}" , {
-                id : id
-            }).then(res => {
-                $('input[name=id]').val(res.data.id)
-                $('input[name=id_asistenU]').val(res.data.id_asisten)
-                $('input[name=nameU]').val(res.data.name)
-                $('input[name=join_dateU]').val(res.data.join_date)
-                $('select[name=roleU').val(res.data.role)
-                $('input[name=emailU]').val(res.data.email)
-                $('#imagetest').attr('src', "{{asset('photo')}}/" + res.data.photo)
-
-
-            })
-
-        }
-
-
-    $(document).ready(function () {
-        var table = $("[data-table]").DataTable({
-            columns: [null, null, null, null, null, null,  { orderable: true }],
-        });
-
-         $('.form-control-search').keyup(function(){
-          table.search($(this).val()).draw() ;
-        }); 
-    });
-
-</script>
 @endsection

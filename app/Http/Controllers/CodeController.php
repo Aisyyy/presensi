@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\code;
+use App\Models\Code;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Models\User;
@@ -43,19 +43,19 @@ class CodeController extends Controller
      */
     public function store(Request $request)
     {
-        $kode = Str::random(10);
-        $store = new Code;
-        $store->id_user = Auth::id();
-        $store->code = $kode;
-        $store->save();
+               
+        
+        $user = Auth::user();
+        $code = Str::random(6);
+        $id = $user->id;
 
-        if(!$store) {
-            $Response = ['error' => 'Error Generating Code'];
-        } else {
-            $Response = ['success' => "Berhasil", "kode" => $kode];
-        }
+        Code::create([
+            'code' => $code,
+            'id_user' => $id
+        ]);
 
-        return response()->json($Response, 200);
+        return redirect('/dashboard')->with('newCode', $code);
+
     }
 
     /**

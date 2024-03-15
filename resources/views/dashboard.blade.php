@@ -15,7 +15,7 @@
     <div class="row">
     @if(auth()->user()->Role == "Admin"|| auth()->user()->Role == "Staff"|| auth()->user()->Role == "Pj" )
         <div class="col-lg-6">
-            <form id="form-data-kode" method="post" data-route="" enctype="multipart/form-data">
+            <form id="form-data-kode" method="post" action="/code/store" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <div class="card">
                     <div class="card-header">

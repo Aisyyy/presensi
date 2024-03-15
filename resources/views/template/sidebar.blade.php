@@ -35,7 +35,7 @@
                 </li>
 
                 <li class="sidebar-nav-item">
-                    <a href="*" class="sidebar-nav-link">
+                    <a href="{{ route('kelaspage') }}" class="sidebar-nav-link">
                         <span class="sidebar-nav-abbr">
                             Dk
                         </span>

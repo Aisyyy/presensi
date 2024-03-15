@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Presensi extends Migration
+class CreateAttendancesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class Presensi extends Migration
      */
     public function up()
     {
-        Schema::create('presensi', function (Blueprint $table) {
+        Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->string('id_kelas');
             $table->string('id_materi');
@@ -21,16 +21,21 @@ class Presensi extends Migration
             $table->string('teaching_role');
             $table->date('date');
             $table->string('start');
-            $table->string('time');
+            $table->string('end');
             $table->string('duration');
             $table->string('id_kode');
-            $table->timestamps();            
+            $table->timestamps();
+
         });
-        
     }
 
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
-        Schema::dropIfExists('presensi');
+        Schema::dropIfExists('attendaces');
     }
 }

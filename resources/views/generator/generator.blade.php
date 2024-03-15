@@ -1,4 +1,4 @@
-@extends('backend.partial.master') @section('content')
+@extends('template.master') @section('content')
 @php 
 $role = App\Models\User::where('id', Auth::id())->first();
 @endphp
