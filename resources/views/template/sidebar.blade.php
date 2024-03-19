@@ -45,7 +45,7 @@
                     </a>
                 </li>
                 <li class="sidebar-nav-item">
-                    <a href="*" class="sidebar-nav-link">
+                    <a href="{{ route('materipage') }}" class="sidebar-nav-link">
                         <span class="sidebar-nav-abbr">
                             Dm
                         </span>

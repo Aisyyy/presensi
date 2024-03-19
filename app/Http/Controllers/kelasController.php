@@ -19,7 +19,7 @@ class kelasController extends Controller
     public function kelaspage()
     {
         $kelas = kelas::all();
-        return view('Kelaspage', ['kelas' => $kelas]);
+        return view('kelas.Kelaspage', ['kelas' => $kelas]);
     }
 
     /**
@@ -29,7 +29,7 @@ class kelasController extends Controller
      */
     public function create()
     {
-        return view('kelas.create');
+        return view('kelaspage.create');
     }
 
     /**
@@ -38,8 +38,9 @@ class kelasController extends Controller
      * @param  \App\Http\Requests\StoreKelasRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeKelas(Request $request)
+    public function store(Request $request)
     {
+        dd($request);
         $validatedData = $request->validate([
             'nama_kelas' => 'required|min:4|unique:kelas',
             'fakultas' => 'required|min:4',
@@ -47,7 +48,7 @@ class kelasController extends Controller
             'tingkat' => 'required',
         ]);
 
-        ruangan::create($validatedData);
+        kelas::create($validatedData);
         return redirect('/kelas')->with('success', 'Kelas successfully addes.');
     }
 
@@ -65,13 +66,14 @@ class kelasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  \App\Http\Requests\EditKelasRequest  $request
      * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $kelas = ruangan::findOrfail($id);
-        return view('kelas.edit', [
+        return view('kelaspage.edit', [
             'kelas' => $kelas,
         ]);
     }

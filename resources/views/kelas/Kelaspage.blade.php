@@ -67,7 +67,7 @@
                                             <td>{{$item->nama_kelas}}</td>
                                             <td>
                                                 <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#ModalEdit" onclick="getData('{{$item->id}}')">Edit</button>
-                                                <a href="{{ route('destroyKelas', ['id' => $item->id]) }}" onclick="event.preventDefault(); 
+                                                <a href="{{ route('destroy', ['id' => $item->id]) }}" onclick="event.preventDefault(); 
                                                 if(confirm('Apakah Anda yakin ingin menghapus data ini?')) { document.getElementById('delete-form-{{ $item->id }}').submit(); }"> Hapus </a>
                                             </td>
                                         </tr>
@@ -95,7 +95,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="form-data-kelas" method="post" action="{{ route('storeKelas')}}" enctype="multipart/form-data">
+            <form id="form-data-kelas" method="post" action="/Kelaspage" enctype="multipart/form-data">
                 {{csrf_field()}} -->
                 <div class="modal-body">
                     <div class="row">
@@ -143,8 +143,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <!-- <form id="form-data-kelas-edit" method="post" data-route="{{ route('updateKelas')}}" enctype="multipart/form-data">
-                {{csrf_field()}} -->
+            <form id="form-data-kelas-edit" method="post" data-route="{{ route(editKelas)}}" enctype="multipart/form-data">
+                {{csrf_field()}}
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-12">
@@ -196,7 +196,7 @@
 <script>
 
 function getData(id){
-            axios.post("{{route('editKelas')}}" , {
+            axios.post("/" , {
                 id : id
             }).then(res => {
                 $('input[name=id]').val(res.data.id)

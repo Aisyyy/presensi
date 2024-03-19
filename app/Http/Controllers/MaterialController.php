@@ -4,22 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendance;
 use App\Models\Absensi;
-use App\Models\materi;
+use App\Models\Material;
+use CreateMaterialsTable;
 use Illuminate\Http\Request;
-
 class MaterialController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function materi()
+    public function materipage()
     {
-        $materi = materi::all();
-        return view('materials.index', [
-            'materials' => $materi
-        ]);
+        $materi = Material::all();
+        return view('materipage', ['materi' => $materi ]);
     }
 
     /**
@@ -44,7 +37,7 @@ class MaterialController extends Controller
             'materi' => 'required|min:4|unique:materials',
         ]);
 
-        materi::create($validatedData);
+        Material::create($validatedData);
         return redirect('/materi')->with('success', 'Material successfully added.');
     }
 
@@ -54,7 +47,7 @@ class MaterialController extends Controller
      * @param  \App\Models\Materi $materi
      * @return \Illuminate\Http\Response
      */
-    public function show(materi $materi)
+    public function show(Material $materi)
     {
         //
     }
@@ -66,12 +59,11 @@ class MaterialController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // public function edit(materi $material)
-    // {
-    //     return view('materi.edit', [
-    //         'materi' => $materi
-    //     ]);
-    // }
+    public function editmateri(Material $material)
+    {
+        return view('editmateri', [
+            'materi' => $material]);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -80,13 +72,13 @@ class MaterialController extends Controller
      * @param  \App\Models\Material  $material
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, materi $material)
+    public function update(Request $request, Material $material)
     {
         $validatedData = $request->validate([
             'materi' => 'required|min:4|unique:materials',
         ]);
 
-        materi::where('id', $material->id)->update($validatedData);
+        Material::where('id', $material->id)->update($validatedData);
         return redirect('/materials')->with('success', 'Material has been updated');
     }
 
@@ -96,14 +88,14 @@ class MaterialController extends Controller
      * @param  \App\Models\Material  $material
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Materi $material)
+    public function destroy(Material $material)
     {
-        $isAlreadyUsed = Absensi::where('id_material', $material->id)->exists();
+        $isAlreadyUsed = attendance::where('id_material', $material->id)->exists();
 
         if ($isAlreadyUsed) {
             return redirect('materials')->with('error', "You cannot delete this material because it is already used");
         };
-        materi::destroy($material->id);
+        Material::destroy($material->id);
         return redirect('materials')->with('success', 'Material has been deleted');
     }
 }

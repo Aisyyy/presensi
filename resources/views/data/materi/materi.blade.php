@@ -120,7 +120,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="form-data-materi" method="post" data-route="{{ route('storeMateri')}}" enctype="multipart/form-data">
+            <form id="form-data-materi" method="post" data-route="/" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <div class="modal-body">
                     <div class="row">
@@ -156,7 +156,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="form-data-materi-edit" method="post" data-route="{{ route('updateMateri')}}" enctype="multipart/form-data">
+            <form id="form-data-materi-edit" method="post" data-route="/" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <div class="modal-body">
                     <div class="row">

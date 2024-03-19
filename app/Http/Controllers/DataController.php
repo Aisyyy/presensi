@@ -9,7 +9,7 @@ class DataController extends Controller
 {
     public function asistenpage (){
         $asisten= User::all();       
-        return view ('asistenpage',['asisten'=>$asisten]);
+        return view ('asisten.asistenpage',['asisten'=>$asisten]);
     }
 
 
